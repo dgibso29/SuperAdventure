@@ -51,7 +51,7 @@ namespace SuperAdventure
 
         private void MoveTo(Location newLocation)
         {
-            if (!_player.HasRequiredItemToEnterThisLocation(newLocation))
+            if (!_player.HasRequiredItemToEnterTHisLocation(newLocation))
             {
                 rtbMessages.Text += "You must have a " + newLocation.ItemRequiredToEnter.Name + " to enter this location." + Environment.NewLine;
 
