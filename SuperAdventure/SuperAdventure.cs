@@ -188,6 +188,10 @@ namespace SuperAdventure
                 btnUsePotion.Visible = false;
             }
 
+            UpdateInventoryListInUI();
+            UpdatePotionListInUI();
+            UpdateWeaponListInUI();
+            UpdateQuestListInUI();
             UpdatePlayerStats();
 
         }
@@ -441,8 +445,7 @@ namespace SuperAdventure
 
         private void SuperAdventure_FormClosing(object sender, FormClosingEventArgs e)
         {
-            File.WriteAllText(
-                PLAYER_DATA_FILE_NAME, _player.ToXmlString());
+            File.WriteAllText(PLAYER_DATA_FILE_NAME, _player.ToXmlString());
         }
     }
 }
