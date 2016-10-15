@@ -204,7 +204,7 @@ namespace Engine
             stats.AppendChild(experiencePoints);
 
             XmlNode currentLocation = playerData.CreateElement("CurrentLocation");
-            currentLocation.AppendChild(playerData.CreateTextNode(this.CurrentLocation.ToString()));
+            currentLocation.AppendChild(playerData.CreateTextNode(this.CurrentLocation.ID.ToString()));
             stats.AppendChild(currentLocation);
 
             // Create the "InventoryItems" child node to hold each InventoryItem node
@@ -238,11 +238,11 @@ namespace Engine
 
                 XmlAttribute idAttribute = playerData.CreateAttribute("ID");
                 idAttribute.Value = quest.Details.ID.ToString();
-                playerQuests.Attributes.Append(idAttribute);
+                playerQuest.Attributes.Append(idAttribute);
 
                 XmlAttribute isCompletedAttribute = playerData.CreateAttribute("IsCompleted");
                 isCompletedAttribute.Value = quest.IsCompleted.ToString();
-                playerQuests.Attributes.Append(isCompletedAttribute);
+                playerQuest.Attributes.Append(isCompletedAttribute);
 
                 playerQuests.AppendChild(playerQuest);
             }
