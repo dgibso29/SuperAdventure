@@ -23,10 +23,13 @@ namespace Engine
         public const int ITEM_ID_SPIDER_FANG = 8;
         public const int ITEM_ID_SPIDER_SILK = 9;
         public const int ITEM_ID_ADVENTURER_PASS = 10;
+        public const int ITEM_ID_ANCIENT_SWORD = 11;
+        public const int ITEM_ID_FADED_MEDALLION = 12;
 
         public const int MONSTER_ID_RAT = 1;
         public const int MONSTER_ID_SNAKE = 2;
         public const int MONSTER_ID_GIANT_SPIDER = 3;
+        public const int MONSTER_ID_DRAUGR = 4;
 
         public const int QUEST_ID_CLEAR_ALCHEMIST_GARDEN = 1;
         public const int QUEST_ID_CLEAR_FARMERS_FIELD = 2;
@@ -40,6 +43,8 @@ namespace Engine
         public const int LOCATION_ID_FARM_FIELD = 7;
         public const int LOCATION_ID_BRIDGE = 8;
         public const int LOCATION_ID_SPIDER_FIELD = 9;
+        public const int LOCATION_ID_BROOK = 10;
+        public const int LOCATION_ID_CAVE = 11;
 
         static World()
         {
@@ -61,6 +66,8 @@ namespace Engine
             Items.Add(new Item(ITEM_ID_SPIDER_FANG, "Spider fang", "Spider fangs"));
             Items.Add(new Item(ITEM_ID_SPIDER_SILK, "Spider silk", "Spider silks"));
             Items.Add(new Item(ITEM_ID_ADVENTURER_PASS, "Adventurer Pass", "Adventurer Passes"));
+            Items.Add(new Weapon(ITEM_ID_ANCIENT_SWORD, "Ancient Sword", "Ancient Swords", 4, 12));
+            Items.Add(new Item(ITEM_ID_FADED_MEDALLION, "Faded Medallion", "Faded Medallions"));
 
         }
 
@@ -78,9 +85,14 @@ namespace Engine
             giantSpider.LootTable.Add(new LootItem(ItemByID(ITEM_ID_SPIDER_FANG), 75, true));
             giantSpider.LootTable.Add(new LootItem(ItemByID(ITEM_ID_SPIDER_SILK), 25, false));
 
+            Monster draugr = new Monster(MONSTER_ID_DRAUGR, "Draugr", 25, 10, 50, 20, 20);
+            draugr.LootTable.Add(new LootItem(ItemByID(ITEM_ID_ANCIENT_SWORD), 10, false));
+            draugr.LootTable.Add(new LootItem(ItemByID(ITEM_ID_FADED_MEDALLION), 70, true));
+
             Monsters.Add(rat);
             Monsters.Add(snake);
             Monsters.Add(giantSpider);
+            Monsters.Add(draugr);
 
         }
 
@@ -131,6 +143,11 @@ namespace Engine
             Location spiderField = new Location(LOCATION_ID_SPIDER_FIELD, "Forest", "You see spider webs covering the trees in this forest.");
             spiderField.MonsterLivingHere = MonsterByID(MONSTER_ID_GIANT_SPIDER);
 
+            Location brook = new Location(LOCATION_ID_BROOK, "Babbling Brook", "You come across a rushing brook, which looks easy enough to ford. It's lovely here.");
+
+            Location cave = new Location(LOCATION_ID_CAVE, "Unmarked Cave", "You nearly fall into a cave, which you cannot locate on your map. A faint murmur emanates from within.");
+            cave.MonsterLivingHere = MonsterByID(MONSTER_ID_DRAUGR);
+
             // Link the locations together
 
             home.LocationToNorth = townSquare;
@@ -144,6 +161,12 @@ namespace Engine
             farmhouse.LocationToWest = farmersField;
 
             farmersField.LocationToEast = farmhouse;
+            farmersField.LocationToNorth = brook;
+
+            brook.LocationToSouth = farmersField;
+            brook.LocationToNorth = cave;
+
+            cave.LocationToSouth = brook;
 
             alchemistHut.LocationToSouth = townSquare;
             alchemistHut.LocationToNorth = alchemistsGarden;
@@ -169,6 +192,8 @@ namespace Engine
             Locations.Add(farmersField);
             Locations.Add(bridge);
             Locations.Add(spiderField);
+            Locations.Add(brook);
+            Locations.Add(cave);
 
         }
 
