@@ -423,11 +423,6 @@ namespace SuperAdventure
             }
         }
 
-        private void SuperAdventure_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void ScrollToBottomOfMessages()
         {
             rtbMessages.SelectionStart = rtbMessages.Text.Length;
