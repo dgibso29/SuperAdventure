@@ -180,10 +180,6 @@ namespace SuperAdventure
                 btnUsePotion.Visible = false;
             }
 
-            UpdateInventoryListInUI();
-            UpdatePotionListInUI();
-            UpdateQuestListInUI();
-            UpdateWeaponListInUI();
             UpdatePlayerStats();
 
         }
