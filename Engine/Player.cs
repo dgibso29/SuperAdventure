@@ -99,20 +99,21 @@ namespace Engine
 
         public bool HasThisQuest(Quest quest)
         {
+            return Quests.Exists(pq => pq.Details.ID == quest.ID);
+        }
+
+
+        public bool CompletedThisQuest(Quest quest)
+        {
             foreach(PlayerQuest playerQuest in Quests)
-                {
+            {
                 if(playerQuest.Details.ID == quest.ID)
                 {
-                    return true;
+                    return playerQuest.IsCompleted;
                 }
             }
 
             return false;
-        }
-
-        public bool CompletedThisQuest(Quest quest)
-        {
-            return Quests.Exists(pq => pq.Details.ID == quest.ID);
         }
 
         public bool HasAllQuestCompletionItems(Quest quest)
